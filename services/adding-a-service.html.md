@@ -74,6 +74,21 @@ many connections.
 As you increase the number of instances, you can bring the ratio of service
 connections to instances closer to one-to-one.
 
+### <a id='arbitrary-params-create'></a> Arbitrary Parameters  ###
+Some services may support additional configuration parameters, which can be passed along with the provision request. The parameters are passed in a valid JSON object containing service-specific configuration parameters, provided either in-line or in a file. For a list of supported configuration parameters, see documentation for the particular service offering.
+
+<pre class="terminal">
+$ cf create-service my-db-service small-plan my-db -c '{"storage_gb":4}'
+
+Creating service my-db in org console / space development as user@example.com... OK
+</pre>
+
+<pre class="terminal">
+$ cf create-service my-db-service small-plan my-db -c /tmp/config.json
+
+Creating service my-db in org console / space development as user@example.com... OK
+</pre>
+
 ## <a id='bind'></a>Binding a Service Instance to your Application ##
 
 Some services provide bindable service instances.
@@ -110,6 +125,21 @@ Binding service my_rabbitmq to app rails-sample in org console / space developme
 
 Use `cf push` to update the VCAP_SERVICES environment variable with your
 changes.
+
+### <a id='arbitrary-params-binding'></a> Arbitrary Parameters  ###
+Some services may support additional configuration parameters, which can be passed along with the binding request. The parameters are passed in a valid JSON object containing service-specific configuration parameters, provided either in-line or in a file. For a list of supported configuration parameters, see documentation for the particular service offering.
+
+<pre class="terminal">
+$ cf bind-service rails-sample my-db -c '{"role":"read-only"}'
+
+Binding service my-db to app rails-sample in org console / space development as user@example.com... OK
+</pre>
+
+<pre class="terminal">
+$ cf bind-service rails-sample my-db -c /tmp/config.json
+
+Binding service my-db to app rails-sample in org console / space development as user@example.com... OK
+</pre>
 
 ## <a id='use'></a>Using Bound Services ##
 
